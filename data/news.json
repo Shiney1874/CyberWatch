@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T21:15:14.068632+00:00",
+  "updated": "2026-10-02T21:33:34.084004+00:00",
   "items": [
     {
       "title": "Frontline Education breach exposes school district employee data",
@@ -74,5 +74,15 @@
       "source": "CISA"
     }
   ],
-  "errors": []
+  "errors": [],
+  "sourceStatus": {
+    "CISA": {
+      "state": "fresh",
+      "updated": "2026-10-02T21:33:34.084004+00:00"
+    },
+    "BleepingComputer": {
+      "state": "fresh",
+      "updated": "2026-10-02T21:33:34.084004+00:00"
+    }
+  }
 }

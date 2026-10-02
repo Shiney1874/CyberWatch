@@ -63,3 +63,9 @@ Plain-English explanations: dotted-underlined terms show help on hover, keyboard
 ## Launch additions
 
 Start here provides a five-step beginner path. About & contact identifies the maintainer and links to public GitHub feedback. Kaspersky and Cloudflare frames are created only after the visitor presses Load; Remove destroys the embedded frame. Choosing a chart before loading makes no provider request. Decisions are kept only for the current page visit.
+
+## Provider reliability fixes
+
+External widget frames now use no-referrer to avoid the Kaspersky connection failure observed when the GitHub site origin was included. Widgets still require an explicit click.
+
+The headline updater uses clear request headers, retries transient failures once, and falls back from CISA RSS to CISA’s official KEV repository. Catalogue additions are labelled CISA KEV with addition dates; they are not presented as RSS articles. Each source has an update timestamp and fresh/fallback/saved state. If every source fails, saved items and their previous timestamps are retained. The browser identifies the fallback and saved-source states.
