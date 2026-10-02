@@ -1,0 +1,51 @@
+name: Publish CyberWatch and refresh headlines
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '23 */6 * * *'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: cyberwatch-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download previous headline snapshot if already published
+        env:
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: |
+          if [ "${{ github.event.repository.name }}" = "${{ github.repository_owner }}.github.io" ]; then
+            SITE_URL="https://${{ github.repository_owner }}.github.io"
+          fi
+          mkdir -p data
+          curl --fail --silent --show-error --max-time 20 "$SITE_URL/data/news.json" -o /tmp/previous-news.json && python -m json.tool /tmp/previous-news.json >/dev/null && cp /tmp/previous-news.json data/news.json || true
+      - name: Refresh security headlines
+        run: |
+          python scripts/update_news.py
+          python scripts/update_kev.py
+      - name: Prepare public site
+        run: |
+          mkdir -p public/data
+          cp index.html public/index.html
+          cp data/*.json public/data/
+          touch public/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
