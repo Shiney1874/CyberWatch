@@ -30,7 +30,7 @@ The included workflow fetches RSS headline metadata and publishes on pushes, man
 
 ## Customise
 
-Edit the name, text, colours and resource list in `index.html`. It has no external libraries, build process or paid dependency. It works on mobile and desktop. No accounts, payments, analytics, ads or affiliate tracking are installed.
+Edit the name, text, colours and resource list in `index.html`. It has no external libraries, build process or paid dependency. It works on mobile and desktop. No accounts, payments, ads or affiliate tracking are installed. Cloudflare Web Analytics measures page views, visits and performance.
 
 ## Monetisation later
 
@@ -69,3 +69,14 @@ Start here provides a five-step beginner path. About & contact identifies the ma
 External widget frames now use no-referrer to avoid the Kaspersky connection failure observed when the GitHub site origin was included. Widgets still require an explicit click.
 
 The headline updater uses clear request headers, retries transient failures once, and falls back from CISA RSS to CISA’s official KEV repository. Catalogue additions are labelled CISA KEV with addition dates; they are not presented as RSS articles. Each source has an update timestamp and fresh/fallback/saved state. If every source fails, saved items and their previous timestamps are retained. The browser identifies the fallback and saved-source states.
+
+## Visitor analytics
+
+Cloudflare Web Analytics was added on 4 October 2026 for shiney1874.github.io. The public beacon token in index.html identifies the analytics site; it is not an account API credential. The site remains hosted on GitHub Pages.
+
+View statistics in the owner's Cloudflare account under Observability > Analytics > Web analytics, then select shiney1874.github.io. Filter the path to /CyberWatch/ if other sites are added to this hostname. Cloudflare reports visits and page views, not an exact count of distinct people. Blocking extensions and disabled JavaScript can prevent collection. Earlier visits cannot be recovered, and our deployment verification visits may be included.
+
+Cloudflare documents automatic SPA measurement, but section-by-section reporting for this site's hash navigation has not been verified; do not assume every section switch is recorded. Practice form input is not sent by our integration. Cloudflare's service uses no cookies or local storage to collect usage metrics. About and the footer privacy disclosure describe the integration separately from the optional embedded map and chart.
+
+Setup: https://developers.cloudflare.com/web-analytics/get-started/
+Privacy: https://www.cloudflare.com/privacypolicy/
